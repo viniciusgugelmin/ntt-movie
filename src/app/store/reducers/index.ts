@@ -1,5 +1,7 @@
-import { moviesReducer } from './movies.reducer';
+import {moviesReducer} from './movies.reducer';
+import {userReducer} from "./user.reducer";
 
 export const reducers = {
-  movies: moviesReducer
+  movies: moviesReducer,
+  user: userReducer
 }
