@@ -17,14 +17,20 @@ export class MoviesService {
     return `${this.apiUrl}?apikey=${this.apiKey}&${path}`;
   }
 
-  searchMoviesByTitle(title: Movies.Movie["Title"]): Observable<Movies.Movie[] | null | undefined> {
+  searchMoviesByTitle(title: Movies.Movie["Title"]): Observable<Movies.Movie[]> {
     return this.http.get<Movies.GetUrlResponse>(this.getUrl(`s=${title}`))
       .pipe(
-        map(response => response.Search)
+        map(response => {
+          if (response.Search) {
+            return response.Search;
+          }
+
+          throw new Error(response.toString());
+        }),
       );
   }
 
   getMovieDetailsById(id: string): Observable<any> {
-    return this.http.get<any>(this.getUrl(`i=${id}`));
+    return this.http.get<any>(this.getUrl(`i=${id}`))
   }
 }
