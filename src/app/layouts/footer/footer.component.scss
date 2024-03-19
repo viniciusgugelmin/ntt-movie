@@ -1,0 +1,7 @@
+.ntt-footer {
+  @apply w-full bg-tertiary h-24 text-white border-t-2 border-secondary;
+
+  &__text-wrapper {
+    @apply flex items-center justify-center h-full text-xs;
+  }
+}
