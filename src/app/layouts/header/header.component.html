@@ -3,4 +3,28 @@
     <img src="{{header.logo}}" alt="{{header.title}}" class="ntt-header__logo">
   </div>
   <h1 class="ntt-header__title">Nttflix</h1>
+  <div class="text-black">
+    <app-input
+      id="movie-title"
+      name="movieTitle"
+      type="text"
+      label="Movie Title"
+      placeholder="Enter movie title"
+      [value]="movieTitle"
+      (onChange)="onTitleChange($event)"
+      [bordered]="true"
+      [disabled]="!!(isLoading$ | async)"
+    />
+    <app-button
+      id="submit"
+      type="submit"
+      [disabled]="!movieTitle"
+      (onClick)="onSubmit($event)"
+    >
+      Search
+    </app-button>
+  </div>
+  <div>
+    {{ userName$ | async }}
+  </div>
 </header>

@@ -2,6 +2,7 @@ namespace Movies {
   export interface GetUrlResponse {
     Search?: (Movie)[] | null;
   }
+
   export interface Movie {
     Title: string;
     Year: string;
@@ -29,11 +30,11 @@ namespace Movies {
     Website: string;
     Response: string;
   }
+
   export interface Ratings {
     Source: string;
     Value: string;
   }
-
 }
 
 namespace User {

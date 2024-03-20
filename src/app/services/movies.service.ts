@@ -14,7 +14,7 @@ export class MoviesService {
   }
 
   private getUrl(path: string): string {
-    return `${this.apiUrl}?apikey=${this.apiKey}&${path}`;
+    return `${this.apiUrl}?${path}&apikey=${this.apiKey}`;
   }
 
   searchMoviesByTitle(title: Movies.Movie["Title"]): Observable<Movies.Movie[]> {
@@ -30,7 +30,7 @@ export class MoviesService {
       );
   }
 
-  getMovieDetailsById(id: string): Observable<any> {
+  getMovieDetailsById(id: string): Observable<Movies.Movie> {
     return this.http.get<any>(this.getUrl(`i=${id}`))
   }
 }

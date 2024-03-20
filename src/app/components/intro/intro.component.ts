@@ -45,8 +45,8 @@ export class IntroComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(event: any): void {
-    this.userName = '';
     this.store.dispatch(UserActions.setName({name: this.userName}));
+    this.userName = '';
 
     this.router.navigate([getRoutePath('Movies')]);
   }
