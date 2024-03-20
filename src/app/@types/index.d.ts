@@ -35,3 +35,9 @@ namespace Movies {
   }
 
 }
+
+namespace User {
+  export interface Properties {
+    name: string;
+  }
+}
