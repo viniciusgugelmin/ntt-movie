@@ -1,3 +1,11 @@
 .ntt-button {
   @apply bg-secondary hover:opacity-80 transition-all text-white font-semibold py-2 px-4 text-sm md:text-base rounded-md disabled:opacity-70 disabled:cursor-not-allowed;
+
+  &--bordered {
+    @apply bg-transparent border-2 border-gray-500 text-gray-500 rounded-none hover:border-white hover:text-white disabled:hover:border-gray-500 disabled:hover:text-gray-500;
+  }
+
+  &--small {
+    @apply py-1 px-2 text-sm;
+  }
 }

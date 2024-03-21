@@ -1,6 +1,10 @@
 <button
   [id]="id"
   class="ntt-button"
+  [ngClass]="{
+    'ntt-button--bordered': bordered,
+    'ntt-button--small': small,
+  }"
   [type]="type"
   [disabled]="disabled"
   (click)="buttonClicked()"

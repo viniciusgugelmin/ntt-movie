@@ -1,0 +1,15 @@
+.ntt-intro {
+  @apply flex flex-col items-center justify-center;
+
+  &__title {
+    @apply text-white text-4xl mt-0 mb-4;
+  }
+
+  app-input {
+    @apply w-full;
+  }
+
+  app-button {
+    @apply mt-10;
+  }
+}
