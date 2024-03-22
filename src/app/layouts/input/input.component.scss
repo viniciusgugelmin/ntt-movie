@@ -3,10 +3,10 @@ input::placeholder {
 }
 
 .ntt-input {
-  @apply relative w-full min-w-[200px] h-14 bg-white;
+  @apply relative w-full min-w-[200px] h-14 bg-black;
 
   &__text {
-    @apply w-full h-full bg-transparent font-sans font-normal outline outline-0 disabled:bg-blue-50 transition-all text-sm px-3.5 pt-3.5 pb-1.5 rounded-[4px];
+    @apply w-full h-full bg-transparent text-white font-sans font-normal outline outline-0 disabled:bg-blue-50 transition-all text-sm px-3.5 pt-3.5 pb-1.5;
   }
 
   &.ntt-input--disabled {
@@ -16,10 +16,28 @@ input::placeholder {
   &.ntt-input--bordered {
     @apply border border-gray-300;
   }
+
+  &--small {
+    @apply h-9;
+
+    .ntt-label {
+      @apply text-[12px];
+
+      &--floating {
+        @apply text-[10px] top-[12px] -translate-y-[7px];
+      }
+    }
+  }
+
+  &--faded {
+    @apply min-w-0 max-w-0 overflow-hidden transition-all duration-300 animate-input-fade-in-x;
+
+    animation-fill-mode: forwards;
+  }
 }
 
 .ntt-label {
-  @apply flex w-full h-full text-[14px] select-none pointer-events-none absolute left-0 font-normal overflow-visible truncate leading-tight peer-focus:leading-tight peer-disabled:text-transparent transition-all top-1/2 -translate-y-[7px] peer-placeholder-shown:text-sm peer-focus:text-[11px] before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 before:rounded-tl-md before:pointer-events-none before:transition-all after:block after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:pointer-events-none after:transition-all peer-placeholder-shown:leading-[3.75] text-gray-500 peer-focus:text-gray-900;
+  @apply flex w-full h-full text-[14px] font-semibold select-none pointer-events-none absolute left-0 overflow-visible truncate leading-tight peer-focus:leading-tight peer-disabled:text-transparent transition-all top-1/2 -translate-y-[7px] peer-placeholder-shown:text-sm peer-focus:text-[11px] before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 before:rounded-tl-md before:pointer-events-none before:transition-all after:block after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 after:pointer-events-none after:transition-all peer-placeholder-shown:leading-[3.75] text-gray-400 peer-focus:text-gray-700;
 
   &--floating {
     @apply text-[12px] top-[15px] -translate-y-[7px];

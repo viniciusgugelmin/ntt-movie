@@ -1,6 +1,6 @@
 <button
   [id]="id"
-  class="ntt-button"
+  [class]="'ntt-button' + (otherClass ? ' ' + otherClass : '')"
   [ngClass]="{
     'ntt-button--bordered': bordered,
     'ntt-button--small': small,

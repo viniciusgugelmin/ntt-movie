@@ -2,28 +2,28 @@
   <div class="ntt-header__logo-wrapper">
     <img src="{{header.logo}}" alt="{{header.title}}" class="ntt-header__logo">
   </div>
-  <h1 class="ntt-header__title">Nttflix</h1>
-  <div class="text-black">
-    <app-input
-      id="movie-title"
-      name="movieTitle"
-      type="text"
-      label="Movie Title"
-      placeholder="Enter movie title"
-      [value]="movieTitle"
-      (onChange)="onTitleChange($event)"
-      [bordered]="true"
-      [disabled]="!!(isLoading$ | async)"
-    />
-    <app-button
-      id="submit"
-      type="submit"
-      [disabled]="!movieTitle"
-      (onClick)="onSubmit($event)"
-    >
-      Search
-    </app-button>
-  </div>
+  <app-input
+    *ngIf="!inputHidden"
+    [id]="'movie-title'"
+    name="movieTitle"
+    type="text"
+    label="Movie"
+    placeholder="Enter movie title"
+    [small]="true"
+    [value]="movieTitle"
+    (onChange)="onTitleChange($event)"
+    (onKeyPress)="onSubmit($event)"
+    [bordered]="true"
+    [faded]="true"
+    [disabled]="!!(isLoading$ | async)"
+  />
+  <app-button
+    [id]="'submit'"
+    otherClass="!bg-transparent !w-5 !p-0 ml-2"
+    (onClick)="onMagnifyingGlassClick()"
+  >
+    <app-magnifying-glass/>
+  </app-button>
   <div>
     {{ userName$ | async }}
   </div>

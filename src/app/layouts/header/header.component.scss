@@ -1,15 +1,11 @@
 .ntt-header {
-  @apply fixed top-0 z-10 flex w-full bg-tertiary h-24 text-white items-center px-4 justify-center md:justify-start;
+  @apply fixed top-0 z-10 flex w-full h-16 items-center px-9 justify-center md:justify-start;
 
   &__logo-wrapper {
-    @apply flex items-center;
+    @apply flex items-center grow;
   }
 
   &__logo {
-    @apply h-10;
-  }
-
-  &__title {
-    @apply absolute text-base uppercase font-bold left-1/2 transform -translate-x-1/2 hidden md:block;
+    @apply h-7;
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {IMoviesReducer} from "../../store/reducers/movies.reducer";
 import * as MoviesActions from "../../store/actions/movies.actions";
@@ -7,8 +7,10 @@ import {InputComponent} from "../input/input.component";
 import {Observable} from "rxjs";
 import * as UserSelectors from "../../store/selectors/user.selectors";
 import * as MoviesSelectors from "../../store/selectors/movies.selectors";
-import {AsyncPipe} from "@angular/common";
+import {AsyncPipe, NgIf} from "@angular/common";
 import {IUserReducer} from "../../store/reducers/user.reducer";
+import {MagnifyingGlassComponent} from "../../icons/magnifying-glass/magnifying-glass.component";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-header',
@@ -16,13 +18,17 @@ import {IUserReducer} from "../../store/reducers/user.reducer";
   imports: [
     ButtonComponent,
     InputComponent,
-    AsyncPipe
+    AsyncPipe,
+    MagnifyingGlassComponent,
+    NgIf,
+    FormsModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
   movieTitle: string = '';
+  inputHidden: boolean = true;
 
   header = {
     title: "NTT Data",
@@ -45,8 +51,23 @@ export class HeaderComponent implements OnInit {
   }
 
   onSubmit(event: any): void {
-    this.store.dispatch(MoviesActions.searchMoviesByTitle({title: this.movieTitle}));
+    if (event.key !== 'Enter') {
+      return;
+    }
 
+    this.store.dispatch(MoviesActions.searchMoviesByTitle({title: this.movieTitle}));
+  }
+
+
+  onMagnifyingGlassClick(): void {
+    this.inputHidden = !this.inputHidden;
     this.movieTitle = '';
+
+    if (!this.inputHidden) {
+      setTimeout(() => {
+        const searchInput = document.getElementById('movie-title');
+        searchInput?.focus();
+      }, 0);
+    }
   }
 }

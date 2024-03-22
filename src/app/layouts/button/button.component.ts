@@ -15,6 +15,7 @@ export class ButtonComponent {
   @Input() type: string = 'button';
   @Input() bordered: boolean = false;
   @Input() small: boolean = false;
+  @Input() otherClass: string = '';
   @Input({transform: booleanAttribute}) disabled: boolean = false;
 
   @Output() onClick: EventEmitter<void> = new EventEmitter<void>();

@@ -16,8 +16,34 @@ module.exports = {
         'quinary': '#BC4328',
         'background': '#141414',
       },
+      animation: {
+        'fade-in': 'fade-in 0.5s ease-in-out',
+        'scale-out': 'scale-out 0.3s ease-in-out',
+        'intro': 'fade-in 0.45s ease-in-out, scale-out 0.45s ease-in-out',
+        'input-fade-in-x': 'input-fade-in-x 0.3s ease-in-out'
+      },
+      keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'scale-out': {
+          '0%': { transform: 'scale(1.1)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        'input-fade-in-x': {
+          '0%': { minWidth: '0' },
+          '100%': { minWidth: '200px' }
+        }
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addVariant }) {
+      addVariant('child', '& > *');
+      addVariant('first-child', '& > *:first-child');
+      addVariant('last-child', '& > *:last-child');
+    }
+  ],
 }
 
