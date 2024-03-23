@@ -1,3 +1,114 @@
-<app-logged-layout>
-  movie
+<app-logged-layout [withoutSearch]="true">
+  <div *ngIf="movie$ | async as movie" class="ntt-movie">
+    <div class="ntt-movie__logo-wrapper">
+      <ng-container *ngIf="movie.Poster else noPoster">
+        <img class="ntt-movie__logo ntt-movie__logo--no-blur" [src]="movie.Poster" alt="{{ movie.Title }} Poster">
+        <img class="ntt-movie__logo ntt-movie__logo--blur" [src]="movie.Poster" alt="{{ movie.Title }} Poster">
+      </ng-container>
+      <ng-template #noPoster>
+        <div class="ntt-movie__logo ntt-movie__logo--no-poster">
+          <span>No Poster</span>
+        </div>
+      </ng-template>
+    </div>
+    <div class="ntt-movie__details">
+      <h2 class="ntt-movie__title">{{ movie.Title }} ({{ movie.Year }})</h2>
+      <h3 *ngIf="movie.Genre" class="ntt-movie__genres">
+        <span *ngFor="let genre of movie.Genre.split(',')">
+          {{ genre }}
+        </span>
+      </h3>
+      <p
+        *ngIf="movie.Rated"
+        [title]="movie.Rated"
+      >
+        <strong>Rated:</strong>
+        {{ movie.Rated }}
+      </p>
+      <p
+        *ngIf="movie.Released"
+        [title]="movie.Released"
+      >
+        <strong>Released:</strong>
+        {{ movie.Released }}
+      </p>
+      <p
+        *ngIf="movie.Runtime"
+        [title]="movie.Runtime"
+      >
+        <strong>Runtime:</strong>
+        {{ movie.Runtime }}
+      </p>
+      <p
+        *ngIf="movie.Director"
+        [title]="movie.Director"
+      >
+        <strong>Director:</strong>
+        {{ movie.Director }}
+      </p>
+      <p
+        *ngIf="movie.Writer"
+        [title]="movie.Writer"
+      >
+        <strong>Writer:</strong>
+        {{ movie.Writer }}
+      </p>
+      <p
+        *ngIf="movie.Actors"
+        [title]="movie.Actors"
+      >
+        <strong>Actors:</strong>
+        {{ movie.Actors }}
+      </p>
+      <p
+        *ngIf="movie.Plot"
+        [title]="movie.Plot"
+      >
+        <strong>Plot:</strong>
+        {{ movie.Plot }}
+      </p>
+      <p
+        *ngIf="movie.Language"
+        [title]="movie.Language"
+      >
+        <strong>Language:</strong>
+        {{ movie.Language }}
+      </p>
+      <p
+        *ngIf="movie.Country"
+        [title]="movie.Country"
+      >
+        <strong>Country:</strong>
+        {{ movie.Country }}
+      </p>
+      <p
+        *ngIf="movie.Awards"
+        [title]="movie.Awards"
+      >
+        <strong>Awards:</strong>
+        {{ movie.Awards }}
+      </p>
+      <p
+        *ngIf="movie.Metascore"
+        [title]="movie.Metascore"
+      >
+        <strong>Metascore:</strong>
+        {{ movie.Metascore }}
+      </p>
+      <p
+        *ngIf="movie.DVD"
+        [title]="movie.DVD"
+      >
+        <strong>DVD:</strong>
+        {{ movie.DVD }}
+      </p>
+      <p
+        *ngIf="movie.BoxOffice"
+        [title]="movie.BoxOffice"
+      >
+        <strong>Box Office:</strong>
+        {{ movie.BoxOffice }}
+      </p>
+    </div>
+  </div>
 </app-logged-layout>

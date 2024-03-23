@@ -1,0 +1,61 @@
+.ntt-movie {
+  @apply px-9 pt-20 pb-9;
+
+  &__logo {
+    @apply h-full object-contain absolute;
+
+    &-wrapper {
+      @apply flex relative justify-center max-h-[450px] min-h-[450px];
+    }
+
+    &--blur {
+      @apply filter blur-[20px];
+    }
+
+    &--no-blur {
+      @apply z-10;
+    }
+
+    &--no-poster {
+      @apply h-[450px] w-[300px] bg-gray-300 font-bold text-gray-500 flex justify-center items-center cursor-not-allowed;
+    }
+  }
+
+  &__details {
+    @apply text-white border-t border-primary pt-4 mt-4 max-w-[1200px] m-auto;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 0px 0px;
+    grid-gap: 10px;
+    grid-template-areas:
+    "title title"
+    "genre genre"
+    "item item2";
+  }
+
+  &__title {
+    @apply text-3xl font-bold;
+
+    grid-area: title;
+  }
+
+  &__genres {
+    @apply flex gap-2;
+
+    grid-area: genre;
+
+    * {
+      @apply text-sm font-bold bg-secondary px-2 py-1 rounded-md transition-colors cursor-default max-h-[28px];
+
+      &:hover {
+        @apply bg-primary;
+      }
+    }
+  }
+
+  p {
+    @apply text-ellipsis overflow-hidden whitespace-nowrap;
+  }
+}

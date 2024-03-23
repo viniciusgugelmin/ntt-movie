@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {HeaderComponent} from "../../layouts/header/header.component";
 import {FooterComponent} from "../../layouts/footer/footer.component";
 
@@ -13,5 +13,5 @@ import {FooterComponent} from "../../layouts/footer/footer.component";
   styleUrl: './logged-layout.component.scss'
 })
 export class LoggedLayoutComponent {
-
+  @Input() withoutSearch = false;
 }

@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {IMoviesReducer} from "../../store/reducers/movies.reducer";
 import * as MoviesActions from "../../store/actions/movies.actions";
@@ -31,6 +31,8 @@ import {getRoutePath} from "../../app.routes";
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
+  @Input() searchBar = true;
+
   movieTitle: string = '';
   inputHidden: boolean = true;
 

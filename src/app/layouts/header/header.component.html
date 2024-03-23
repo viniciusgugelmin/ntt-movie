@@ -20,6 +20,7 @@
     [disabled]="!!(isLoading$ | async)"
   />
   <app-button
+    *ngIf="searchBar"
     [id]="'submit'"
     otherClass="!bg-transparent !w-5 !p-0 ml-2"
     (onClick)="onMagnifyingGlassClick()"
