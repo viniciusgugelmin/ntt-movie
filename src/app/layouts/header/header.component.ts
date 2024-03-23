@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {IMoviesReducer} from "../../store/reducers/movies.reducer";
 import * as MoviesActions from "../../store/actions/movies.actions";
@@ -7,12 +7,11 @@ import {InputComponent} from "../input/input.component";
 import {Observable} from "rxjs";
 import * as UserSelectors from "../../store/selectors/user.selectors";
 import * as MoviesSelectors from "../../store/selectors/movies.selectors";
-import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
+import {AsyncPipe, NgClass, NgIf, NgOptimizedImage} from "@angular/common";
 import {IUserReducer} from "../../store/reducers/user.reducer";
 import {MagnifyingGlassComponent} from "../../icons/magnifying-glass/magnifying-glass.component";
 import {FormsModule} from "@angular/forms";
 import {RouterLink} from "@angular/router";
-import {getRoutePath} from "../../app.routes";
 
 @Component({
   selector: 'app-header',
@@ -25,7 +24,8 @@ import {getRoutePath} from "../../app.routes";
     NgIf,
     FormsModule,
     RouterLink,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgClass
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -35,6 +35,9 @@ export class HeaderComponent implements OnInit {
 
   movieTitle: string = '';
   inputHidden: boolean = true;
+
+  isScrollingDown: boolean = false;
+  lastScrollPosition: number = 0;
 
   header = {
     title: "NTT Data",
@@ -64,7 +67,6 @@ export class HeaderComponent implements OnInit {
     this.store.dispatch(MoviesActions.searchMoviesByTitle({searchTerm: this.movieTitle, currentPage: 1}));
   }
 
-
   onMagnifyingGlassClick(): void {
     if (!this.inputHidden && this.movieTitle) {
       this.store.dispatch(MoviesActions.searchMoviesByTitle({searchTerm: this.movieTitle, currentPage: 1}));
@@ -82,5 +84,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  protected readonly getRoutePath = getRoutePath;
+  @HostListener('window:scroll', ['$event'])
+  onWindowScroll() {
+    const currentScrollPosition = window.pageYOffset;
+
+    if (currentScrollPosition > 50 && Math.abs(this.lastScrollPosition - currentScrollPosition) > 0) {
+      this.isScrollingDown = currentScrollPosition > this.lastScrollPosition;
+    }
+
+    this.lastScrollPosition = currentScrollPosition;
+  }
 }

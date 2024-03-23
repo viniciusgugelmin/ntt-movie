@@ -1,4 +1,9 @@
-<header class="ntt-header">
+<header
+  class="ntt-header"
+  [ngClass]="{
+  'ntt-header--with-background': isScrollingDown
+  }"
+>
   <div class="ntt-header__logo-wrapper">
     <a routerLink="/movies" >
       <img src="{{header.logo}}" alt="{{header.title}}" class="ntt-header__logo" />

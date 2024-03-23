@@ -1,5 +1,9 @@
 .ntt-header {
-  @apply fixed top-0 z-50 flex w-full h-16 items-center px-9 justify-center md:justify-start;
+  @apply fixed top-0 z-50 flex w-full h-16 items-center px-9 justify-center md:justify-start transition-all duration-700 ease-in-out;
+
+  &--with-background {
+    @apply bg-black shadow-md;
+  }
 
   &__logo-wrapper {
     @apply flex items-center grow;
