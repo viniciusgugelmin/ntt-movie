@@ -27,7 +27,11 @@ const hasLoggedIn: CanActivateFn = (route, state) => {
     }
   });
 
-  return hasName;
+  if (needsLogin) {
+    return hasName;
+  }
+
+  return true
 }
 
 export const routes: AppRoute[] = [

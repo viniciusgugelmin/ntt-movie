@@ -30,8 +30,6 @@ export class IntroComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(UserActions.getName());
-
     this.userName$ = this.store.select(UserSelectors.selectUserName);
     this.userNameSubscription = this.userName$.subscribe((name: User.Properties['name']) => {
       this.userName = name;

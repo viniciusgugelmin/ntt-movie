@@ -3,12 +3,14 @@ import * as MoviesActions from '../actions/movies.actions';
 
 export interface IMoviesReducer {
   movies: Movies.Movie[];
+  favorites: Movies.Movie['imdbID'][];
   isLoading: boolean;
   error: any;
 }
 
 const initialState: IMoviesReducer = {
   movies: [],
+  favorites: [],
   isLoading: false,
   error: null
 };
@@ -17,5 +19,13 @@ export const moviesReducer = createReducer(
   initialState,
   on(MoviesActions.searchMoviesByTitle, state => ({ ...state, isLoading: true, error: false })),
   on(MoviesActions.searchMoviesByTitleSuccess, (state, { movies }) => ({ ...state, movies, isLoading: false })),
-  on(MoviesActions.searchMoviesByTitleFailure, (state, { error }) => ({ ...state, isLoading: false, error }))
+  on(MoviesActions.searchMoviesByTitleFailure, (state, { error }) => ({ ...state, isLoading: false, error })),
+  on(MoviesActions.getMovieDetailsById, state => ({ ...state, isLoading: true, error: false })),
+  on(MoviesActions.getMovieDetailsByIdSuccess, (state, { movie }) => ({ ...state, movies: [...state.movies, movie], isLoading: false })),
+  on(MoviesActions.getMovieDetailsByIdFailure, (state, { error }) => ({ ...state, isLoading: false, error })),
+  on(MoviesActions.getFavorites, state => ({ ...state, isLoading: true })),
+  on(MoviesActions.getFavoritesSuccess, (state, { favorites }) => ({ ...state, favorites, isLoading: false })),
+  on(MoviesActions.getFavoritesFailure, (state, { error }) => ({ ...state, isLoading: false, error })),
+  on(MoviesActions.addToFavorites, (state, { imdbID }) => ({ ...state, favorites: [...state.favorites, imdbID] })),
+  on(MoviesActions.removeFromFavorites, (state, { imdbID }) => ({ ...state, favorites: state.favorites.filter(favorite => favorite !== imdbID) })),
 );

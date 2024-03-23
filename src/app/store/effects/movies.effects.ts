@@ -22,4 +22,24 @@ export class MoviesEffects {
         )
     )
   ));
+
+  getMovieDetailsById$ = createEffect(() => this.actions$.pipe(
+      ofType(MoviesActions.getMovieDetailsById),
+      mergeMap(({imdbID}) => this.moviesService.getMovieDetailsById(imdbID)
+        .pipe(
+          map(movie => MoviesActions.getMovieDetailsByIdSuccess({movie})),
+          catchError(error => of(MoviesActions.getMovieDetailsByIdFailure({error})))
+        )
+    )
+  ));
+
+  getFavorites$ = createEffect(() => this.actions$.pipe(
+      ofType(MoviesActions.getFavorites),
+      mergeMap(() => this.moviesService.getFavorites()
+        .pipe(
+          map(favorites => MoviesActions.getFavoritesSuccess({favorites})),
+          catchError(error => of(MoviesActions.getFavoritesFailure({error})))
+        )
+    )
+  ));
 }

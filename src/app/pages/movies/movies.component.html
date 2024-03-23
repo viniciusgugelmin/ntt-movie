@@ -1,6 +1,11 @@
 <app-logged-layout>
   <div class="ntt-movies__background-wrapper">
-    <div class="ntt-movies__background"></div>
+    <div class="ntt-movies__background">
+      <h1 class="ntt-movies__title">Hello {{ userName$ | async }}</h1>
+      <small>
+        Let's watch some movies!
+      </small>
+    </div>
   </div>
   <app-movies-list />
 </app-logged-layout>

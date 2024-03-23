@@ -15,9 +15,15 @@ export class UserService {
     try {
       await delay;
 
-      return this.localStorageService.getItem('name') || ''
+      const name = this.localStorageService.getItem('name');
+
+      if (name) {
+        return name;
+      }
+
+      throw new Error('No name found');
     } catch (e) {
-      localStorage.removeItem('items');
+      localStorage.setItem('name', '')
       return '';
     }
   }

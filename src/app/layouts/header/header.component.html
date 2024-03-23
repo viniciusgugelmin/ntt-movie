@@ -1,6 +1,8 @@
 <header class="ntt-header">
   <div class="ntt-header__logo-wrapper">
-    <img src="{{header.logo}}" alt="{{header.title}}" class="ntt-header__logo">
+    <a routerLink="/movies" >
+      <img src="{{header.logo}}" alt="{{header.title}}" class="ntt-header__logo" />
+    </a>
   </div>
   <app-input
     *ngIf="!inputHidden"
@@ -24,7 +26,4 @@
   >
     <app-magnifying-glass/>
   </app-button>
-  <div>
-    {{ userName$ | async }}
-  </div>
 </header>

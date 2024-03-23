@@ -7,10 +7,12 @@ import {InputComponent} from "../input/input.component";
 import {Observable} from "rxjs";
 import * as UserSelectors from "../../store/selectors/user.selectors";
 import * as MoviesSelectors from "../../store/selectors/movies.selectors";
-import {AsyncPipe, NgIf} from "@angular/common";
+import {AsyncPipe, NgIf, NgOptimizedImage} from "@angular/common";
 import {IUserReducer} from "../../store/reducers/user.reducer";
 import {MagnifyingGlassComponent} from "../../icons/magnifying-glass/magnifying-glass.component";
 import {FormsModule} from "@angular/forms";
+import {RouterLink} from "@angular/router";
+import {getRoutePath} from "../../app.routes";
 
 @Component({
   selector: 'app-header',
@@ -21,7 +23,9 @@ import {FormsModule} from "@angular/forms";
     AsyncPipe,
     MagnifyingGlassComponent,
     NgIf,
-    FormsModule
+    FormsModule,
+    RouterLink,
+    NgOptimizedImage
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -75,4 +79,6 @@ export class HeaderComponent implements OnInit {
       }, 0);
     }
   }
+
+  protected readonly getRoutePath = getRoutePath;
 }
