@@ -15,9 +15,9 @@ export class MoviesEffects {
 
   searchMoviesByTitle$ = createEffect(() => this.actions$.pipe(
       ofType(MoviesActions.searchMoviesByTitle),
-      mergeMap( ({title})=> this.moviesService.searchMoviesByTitle(title)
+      mergeMap( ({searchTerm, currentPage})=> this.moviesService.searchMoviesByTitle(searchTerm, currentPage)
         .pipe(
-          map(movies => MoviesActions.searchMoviesByTitleSuccess({movies})),
+          map(({movies, totalPages, currentPage, searchTerm }) => MoviesActions.searchMoviesByTitleSuccess({movies, totalPages, currentPage, searchTerm})),
           catchError(error => of(MoviesActions.searchMoviesByTitleFailure({error})))
         )
     )

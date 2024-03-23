@@ -37,13 +37,18 @@ export class MoviesService {
     }
   }
 
-  searchMoviesByTitle(title: Movies.Movie["Title"]): Observable<Movies.Movie[]> {
-    return this.http.get<Movies.GetUrlResponse>(this.getUrl(`s=${title}`))
+  searchMoviesByTitle(title: Movies.Movie["Title"], currentPage: number): Observable<{ movies: Movies.Movie[], totalPages: number, currentPage: number, searchTerm: string }> {
+    return this.http.get<Movies.GetUrlResponse>(this.getUrl(`s=${title}&page=${currentPage}`))
       .pipe(
         delay(2000),
         map(response => {
-          if (response.Search) {
-            return response.Search;
+          if (response.Search && response.totalResults) {
+            return {
+              movies: response.Search,
+              totalPages: Math.ceil(parseFloat((+response.totalResults / 10).toFixed(1))),
+              currentPage: currentPage + 1,
+              searchTerm: title
+            }
           }
 
           throw new Error((response as Movies.GetUrlResponseError).Error)

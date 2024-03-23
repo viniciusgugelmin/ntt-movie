@@ -3,6 +3,9 @@ import * as MoviesActions from '../actions/movies.actions';
 
 export interface IMoviesReducer {
   movies: Movies.Movie[];
+  currentPage: number;
+  totalPages: number;
+  searchTerm: string;
   favorites: Movies.Movie[];
   isLoading: boolean;
   error: any;
@@ -10,6 +13,9 @@ export interface IMoviesReducer {
 
 const initialState: IMoviesReducer = {
   movies: [],
+  currentPage: 1,
+  totalPages: 0,
+  searchTerm: '',
   favorites: [],
   isLoading: false,
   error: null
@@ -18,7 +24,12 @@ const initialState: IMoviesReducer = {
 export const moviesReducer = createReducer(
   initialState,
   on(MoviesActions.searchMoviesByTitle, state => ({ ...state, isLoading: true, error: false })),
-  on(MoviesActions.searchMoviesByTitleSuccess, (state, { movies }) => ({ ...state, movies, isLoading: false })),
+  on(MoviesActions.searchMoviesByTitleSuccess, (state, { movies, totalPages, currentPage, searchTerm }) => {
+    const _searchTerm = searchTerm.toLowerCase();
+    const moviesToStore = state.searchTerm === _searchTerm ? [...state.movies, ...movies] : movies;
+
+    return { ...state, movies: moviesToStore, isLoading: false, totalPages, currentPage, searchTerm: _searchTerm };
+  }),
   on(MoviesActions.searchMoviesByTitleFailure, (state, { error }) => ({ ...state, isLoading: false, error })),
 
   on(MoviesActions.getMovieDetailsById, state => ({ ...state, isLoading: true, error: false })),

@@ -8,6 +8,21 @@ export const selectAllMovies = createSelector(
   state => state.movies
 );
 
+export const selectCurrentPage = createSelector(
+  selectMovieState,
+  state => state.currentPage
+);
+
+export const selectTotalPages = createSelector(
+  selectMovieState,
+  state => state.totalPages
+);
+
+export const selectSearchTerm = createSelector(
+  selectMovieState,
+  state => state.searchTerm
+);
+
 export const selectMovieById = (imdbID: Movies.Movie['imdbID']) => createSelector(
   selectAllMovies,
   movies => movies.find(movie => movie.imdbID === imdbID)

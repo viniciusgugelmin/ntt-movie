@@ -30,6 +30,10 @@
       @apply transition-all delay-100 duration-200 text-white text-[10px] font-bold m-0 absolute -bottom-[15px] w-full p-1 bg-neutral-800 text-center opacity-0;
     }
 
+    &-poster {
+      @apply bg-gray-300;
+    }
+
     &:hover {
       @apply transform scale-150 z-10 delay-300 duration-300;
 

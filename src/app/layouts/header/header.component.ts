@@ -61,13 +61,13 @@ export class HeaderComponent implements OnInit {
       return;
     }
 
-    this.store.dispatch(MoviesActions.searchMoviesByTitle({title: this.movieTitle}));
+    this.store.dispatch(MoviesActions.searchMoviesByTitle({searchTerm: this.movieTitle, currentPage: 1}));
   }
 
 
   onMagnifyingGlassClick(): void {
     if (!this.inputHidden && this.movieTitle) {
-      this.store.dispatch(MoviesActions.searchMoviesByTitle({title: this.movieTitle}));
+      this.store.dispatch(MoviesActions.searchMoviesByTitle({searchTerm: this.movieTitle, currentPage: 1}));
       return;
     }
 

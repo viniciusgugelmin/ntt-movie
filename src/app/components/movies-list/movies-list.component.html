@@ -35,6 +35,14 @@
             {{ movie.Title }}
           </p>
         </a>
+        <app-button
+          *ngIf="pagesRemaining"
+          class="flex items-center justify-center max-w-[121px] min-w-[121px]"
+          [small]="true"
+          (onClick)="seeMore()"
+        >
+          See more
+        </app-button>
       </div>
       <div
         class="ntt-movies-list__movies ntt-movies-list__movies--only-favorites"

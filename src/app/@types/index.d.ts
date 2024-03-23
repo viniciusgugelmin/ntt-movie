@@ -1,6 +1,7 @@
 namespace Movies {
   export interface GetUrlResponse {
     Search?: (Movie)[] | null;
+    totalResults?: string;
   }
 
   export interface GetUrlResponseError {
