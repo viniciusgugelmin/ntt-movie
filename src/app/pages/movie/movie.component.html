@@ -12,7 +12,12 @@
       </ng-template>
     </div>
     <div class="ntt-movie__details">
-      <h2 class="ntt-movie__title">{{ movie.Title }} ({{ movie.Year }})</h2>
+      <h2 class="ntt-movie__title">
+        <span>
+          {{ movie.Title }} ({{ movie.Year }})
+        </span>
+        <app-favorite imdbID="{{ movie.imdbID }}" />
+      </h2>
       <h3 *ngIf="movie.Genre" class="ntt-movie__genres">
         <span *ngFor="let genre of movie.Genre.split(',')">
           {{ genre }}

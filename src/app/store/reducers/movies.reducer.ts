@@ -3,7 +3,7 @@ import * as MoviesActions from '../actions/movies.actions';
 
 export interface IMoviesReducer {
   movies: Movies.Movie[];
-  favorites: Movies.Movie['imdbID'][];
+  favorites: Movies.Movie[];
   isLoading: boolean;
   error: any;
 }
@@ -38,6 +38,10 @@ export const moviesReducer = createReducer(
   on(MoviesActions.getFavorites, state => ({ ...state, isLoading: true })),
   on(MoviesActions.getFavoritesSuccess, (state, { favorites }) => ({ ...state, favorites, isLoading: false })),
   on(MoviesActions.getFavoritesFailure, (state, { error }) => ({ ...state, isLoading: false, error })),
-  on(MoviesActions.addToFavorites, (state, { imdbID }) => ({ ...state, favorites: [...state.favorites, imdbID] })),
-  on(MoviesActions.removeFromFavorites, (state, { imdbID }) => ({ ...state, favorites: state.favorites.filter(favorite => favorite !== imdbID) })),
+  on(MoviesActions.addToFavorites, (state, { movie }) => ({ ...state, favorites: [...state.favorites, movie] })),
+  on(MoviesActions.removeFromFavorites, (state, { movie }) => {
+    const favorites = state.favorites.filter(favorite => favorite.imdbID !== movie.imdbID);
+
+    return { ...state, favorites };
+  }),
 );

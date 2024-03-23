@@ -12,7 +12,15 @@
   }
 
   &__movies {
-    @apply flex flex-wrap w-full px-9 gap-4 transform -translate-y-40;
+    @apply flex flex-wrap w-full px-9 gap-4 transform -translate-y-40 relative z-20;
+
+    &-title {
+      @apply w-full text-white text-lg font-bold m-0 mt-2;
+    }
+
+    &--only-favorites {
+      @apply z-10;
+    }
   }
 
   &__movie {

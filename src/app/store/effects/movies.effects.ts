@@ -42,4 +42,24 @@ export class MoviesEffects {
         )
     )
   ));
+
+  addToFavorites$ = createEffect(() => this.actions$.pipe(
+      ofType(MoviesActions.addToFavorites),
+      mergeMap(({movie}) => this.moviesService.addToFavorites(movie)
+        .pipe(
+          map(favorites => MoviesActions.getFavoritesSuccess({favorites})),
+          catchError(error => of(MoviesActions.getFavoritesFailure({error})))
+        )
+    )
+  ));
+
+  removeFromFavorites$ = createEffect(() => this.actions$.pipe(
+      ofType(MoviesActions.removeFromFavorites),
+      mergeMap(({movie}) => this.moviesService.removeFromFavorites(movie)
+        .pipe(
+          map(favorites => MoviesActions.getFavoritesSuccess({favorites})),
+          catchError(error => of(MoviesActions.getFavoritesFailure({error})))
+        )
+    )
+  ));
 }

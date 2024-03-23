@@ -9,7 +9,7 @@ export const getMovieDetailsByIdSuccess = createAction('[Movie] Get Movie Detail
 export const getMovieDetailsByIdFailure = createAction('[Movie] Get Movie Details By Id Failure', props<{ error: any }>());
 
 export const getFavorites = createAction('[Movie] Get Favorites');
-export const getFavoritesSuccess = createAction('[Movie] Get Favorites Success', props<{ favorites: Movies.Movie['imdbID'][] }>());
+export const getFavoritesSuccess = createAction('[Movie] Get Favorites Success', props<{ favorites: Movies.Movie[] }>());
 export const getFavoritesFailure = createAction('[Movie] Get Favorites Failure', props<{ error: any }>());
-export const addToFavorites = createAction('[Movie] Add To Favorites', props<{ imdbID: Movies.Movie['imdbID'] }>());
-export const removeFromFavorites = createAction('[Movie] Remove From Favorites', props<{ imdbID: Movies.Movie['imdbID'] }>());
+export const addToFavorites = createAction('[Movie] Add To Favorites', props<{ movie: Movies.Movie }>());
+export const removeFromFavorites = createAction('[Movie] Remove From Favorites', props<{ movie: Movies.Movie }>());

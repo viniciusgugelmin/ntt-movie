@@ -8,7 +8,7 @@ export const selectAllMovies = createSelector(
   state => state.movies
 );
 
-export const selectMovieById = (imdbID: string) => createSelector(
+export const selectMovieById = (imdbID: Movies.Movie['imdbID']) => createSelector(
   selectAllMovies,
   movies => movies.find(movie => movie.imdbID === imdbID)
 );
@@ -16,6 +16,11 @@ export const selectMovieById = (imdbID: string) => createSelector(
 export const selectFavorites = createSelector(
   selectMovieState,
   state => state.favorites
+);
+
+export const selectIsFavorite = (imdbID: Movies.Movie['imdbID']) => createSelector(
+  selectFavorites,
+  favorites => !!favorites.find(favorite => favorite.imdbID === imdbID)
 );
 
 export const selectMoviesLoading = createSelector(

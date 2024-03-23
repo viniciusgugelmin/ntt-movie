@@ -8,6 +8,7 @@ import * as MoviesSelectors from "../../store/selectors/movies.selectors";
 import {ActivatedRoute} from "@angular/router";
 import {selectMovieById} from "../../store/selectors/movies.selectors";
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
+import {FavoriteComponent} from "../../components/favorite/favorite.component";
 
 @Component({
   selector: 'app-movie',
@@ -16,7 +17,8 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
     LoggedLayoutComponent,
     AsyncPipe,
     NgIf,
-    NgForOf
+    NgForOf,
+    FavoriteComponent
   ],
   templateUrl: './movie.component.html',
   styleUrl: './movie.component.scss'

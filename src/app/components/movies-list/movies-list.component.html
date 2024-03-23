@@ -1,7 +1,7 @@
 <div class="ntt-movies-list">
   <ng-container *ngIf="isLoading$ | async">
     <div class="ntt-movies-list__loading">
-      Loading...
+      Loading movies, please wait...
     </div>
   </ng-container>
   <ng-container *ngIf="(error$ | async) as error">
@@ -11,18 +11,43 @@
   </ng-container>
   <ng-template [ngIf]="!(isLoading$ | async) && !(error$ | async)">
     <div
-      *ngIf="(movies$ | async)?.length === 0 else movies"
+      *ngIf="(movies$ | async)?.length === 0 && (favorites$ | async)?.length === 0; else moviesList"
       class="ntt-movies-list__empty"
     >
       No movies to display, try searching for something else
     </div>
-    <ng-template #movies>
+    <ng-template #moviesList>
       <div
         class="ntt-movies-list__movies"
       >
         <a
           routerLink="/movie/{{ movie.imdbID }}"
-          *ngFor="let movie of movies$ | async"
+          *ngFor="let movie of movies"
+          class="ntt-movies-list__movie"
+        >
+          <img
+            class="ntt-movies-list__movie-poster"
+            [ngSrc]="movie.Poster"
+            [alt]="movie.Title"
+            fill="cover"
+          />
+          <p class="ntt-movies-list__movie-title">
+            {{ movie.Title }}
+          </p>
+        </a>
+      </div>
+      <div
+        class="ntt-movies-list__movies ntt-movies-list__movies--only-favorites"
+      >
+        <h1
+          *ngIf="favorites$ | async"
+          class="ntt-movies-list__movies-title"
+        >
+          Favorites
+        </h1>
+        <a
+          routerLink="/movie/{{ movie.imdbID }}"
+          *ngFor="let movie of favorites"
           class="ntt-movies-list__movie"
         >
           <img

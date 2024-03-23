@@ -18,7 +18,7 @@ export class MoviesService {
     return `${this.apiUrl}?${path}&apikey=${this.apiKey}`;
   }
 
-  private async getFavoritesFromLocalStorage(): Promise<Movies.Movie['imdbID'][]> {
+  private async getFavoritesFromLocalStorage(): Promise<Movies.Movie[]> {
     const delay = new Promise(resolve => setTimeout(resolve, 0));
 
     try {
@@ -51,30 +51,35 @@ export class MoviesService {
       );
   }
 
-  getFavorites(): Observable<Movies.Movie['imdbID'][]> {
+  getFavorites(): Observable<Movies.Movie[]> {
     return from(this.getFavoritesFromLocalStorage());
   }
 
-  addToFavorites(imdbID: Movies.Movie['imdbID']): Observable<Movies.Movie['imdbID']> {
+  addToFavorites(movie: Movies.Movie): Observable<Movies.Movie[]> {
     return from(this.getFavoritesFromLocalStorage())
       .pipe(
         map(favorites => {
-          if (!favorites.includes(imdbID)) {
-            this.localStorageService.setItem('favorites', JSON.stringify([...favorites, imdbID]));
+          const movieAlreadyAdded = favorites.find(favorite => favorite.imdbID === movie.imdbID);
+          const favoritesUpdated = [...favorites, movie];
+
+          if (!movieAlreadyAdded) {
+            this.localStorageService.setItem('favorites', JSON.stringify(favoritesUpdated));
           }
 
-          return imdbID;
+          return favoritesUpdated;
         }),
       );
   }
 
-  removeFromFavorites(imdbID: Movies.Movie['imdbID']): Observable<Movies.Movie['imdbID']> {
+  removeFromFavorites(movie: Movies.Movie): Observable<Movies.Movie[]> {
     return from(this.getFavoritesFromLocalStorage())
       .pipe(
         map(favorites => {
-          this.localStorageService.setItem('favorites', JSON.stringify(favorites.filter(favorite => favorite !== imdbID)));
+          const updatedFavorites = favorites.filter(favorite => favorite.imdbID !== movie.imdbID);
 
-          return imdbID;
+          this.localStorageService.setItem('favorites', JSON.stringify(updatedFavorites));
+
+          return updatedFavorites;
         }),
       );
   }

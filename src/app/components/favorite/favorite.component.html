@@ -1,0 +1,6 @@
+<app-button
+  (click)="toggleFavorite()"
+  otherClass="!bg-transparent !w-5 !p-0"
+>
+  <app-heart [filled]="isFavorite$ | async" />
+</app-button>
