@@ -1,7 +1,28 @@
-import {Routes, Route} from '@angular/router';
+import {Routes, Route, CanActivateFn, Router} from '@angular/router';
+import {inject} from "@angular/core";
+import {UserService} from "./services/user.service";
+import {map, Observable, take} from "rxjs";
 
 interface AppRoute extends Route {
   name: string;
+}
+
+const hasLoggedIn: CanActivateFn = (route, state) => {
+  const router: Router = inject(Router);
+  const userName: Observable<User.Properties['name']> = inject(UserService).getName();
+
+  const hasName = userName.pipe(
+    map(name => !!name),
+    take(1)
+  );
+
+  hasName.subscribe(hasName => {
+    if (!hasName) {
+      router.navigate([getRoutePath('Home')])
+    }
+  });
+
+  return hasName;
 }
 
 export const routes: AppRoute[] = [
@@ -13,7 +34,8 @@ export const routes: AppRoute[] = [
   {
     name: 'Movies',
     path: 'movies',
-    loadComponent: () => import('./pages/movies/movies.component').then(m => m.MoviesComponent)
+    loadComponent: () => import('./pages/movies/movies.component').then(m => m.MoviesComponent),
+    canActivate: [hasLoggedIn],
   },
   {
     name: 'Movie',

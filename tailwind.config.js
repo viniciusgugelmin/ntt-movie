@@ -18,6 +18,7 @@ module.exports = {
       },
       animation: {
         'fade-in': 'fade-in 0.5s ease-in-out',
+        'fade-in-80': 'fade-in-80 0.5s ease-in-out',
         'scale-out': 'scale-out 0.3s ease-in-out',
         'intro': 'fade-in 0.45s ease-in-out, scale-out 0.45s ease-in-out',
         'input-fade-in-x': 'input-fade-in-x 0.3s ease-in-out'
@@ -26,6 +27,10 @@ module.exports = {
         'fade-in': {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
+        },
+        'fade-in-80': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '0.8' },
         },
         'scale-out': {
           '0%': { transform: 'scale(1.1)' },

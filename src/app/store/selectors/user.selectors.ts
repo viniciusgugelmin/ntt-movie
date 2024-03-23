@@ -7,3 +7,13 @@ export const selectUserName = createSelector(
   selectUserState,
   state => state.name
 );
+
+export const selectUserLoading = createSelector(
+  selectUserState,
+  state => state.isLoading
+);
+
+export const selectUserError = createSelector(
+  selectUserState,
+  state => state.error
+);

@@ -1,0 +1,9 @@
+:host {
+  @apply flex flex-col min-h-screen;
+}
+
+.ntt-logged-layout {
+  &__content {
+    @apply flex-1;
+  }
+}

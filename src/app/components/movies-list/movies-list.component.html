@@ -1,9 +1,11 @@
-<div>Movies</div>
 <div *ngIf="(isLoading$ | async)">
   Loading...
 </div>
 <div *ngIf="(error$ | async)">
   Error
+</div>
+<div *ngIf="(movies$ | async)?.length === 0">
+  No movies found
 </div>
 <div *ngFor="let movie of movies$ | async">
   {{ movie.Title }}

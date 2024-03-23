@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
+import {ButtonComponent} from "../button/button.component";
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [],
+    imports: [
+        ButtonComponent
+    ],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss'
 })
 export class FooterComponent {
-
+  onProjectCodeClick() {
+    window.open('https://github.com/viniciusgugelmin/ntt-movie', '_blank');
+  }
 }

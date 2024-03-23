@@ -1,5 +1,14 @@
 <footer class="ntt-footer">
   <p class="ntt-footer__text-wrapper">
-   © 2023 by Vinícius Gugelmin
+    <app-button
+      [id]="'submit'"
+      type="submit"
+      [bordered]="true"
+      [small]="true"
+      (onClick)="onProjectCodeClick()"
+    >
+      Project code
+    </app-button>
+   <span>© 2023 by Vinícius Gugelmin</span>
   </p>
 </footer>
