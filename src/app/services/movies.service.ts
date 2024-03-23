@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
-import {catchError, map, Observable} from "rxjs";
+import {catchError, delay, map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -20,12 +20,13 @@ export class MoviesService {
   searchMoviesByTitle(title: Movies.Movie["Title"]): Observable<Movies.Movie[]> {
     return this.http.get<Movies.GetUrlResponse>(this.getUrl(`s=${title}`))
       .pipe(
+        delay(2000),
         map(response => {
           if (response.Search) {
             return response.Search;
           }
 
-          throw new Error(response.toString());
+          throw new Error((response as Movies.GetUrlResponseError).Error)
         }),
       );
   }

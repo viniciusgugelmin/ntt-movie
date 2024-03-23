@@ -60,6 +60,11 @@ export class HeaderComponent implements OnInit {
 
 
   onMagnifyingGlassClick(): void {
+    if (!this.inputHidden && this.movieTitle) {
+      this.store.dispatch(MoviesActions.searchMoviesByTitle({title: this.movieTitle}));
+      return;
+    }
+
     this.inputHidden = !this.inputHidden;
     this.movieTitle = '';
 

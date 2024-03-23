@@ -1,0 +1,33 @@
+.ntt-movies-list {
+  &__loading {
+    @apply w-full text-center text-white text-sm p-2 border border-primary bg-secondary;
+  }
+
+  &__error {
+    @apply w-full text-center text-white text-sm p-2 border border-red-800 bg-red-700;
+  }
+
+  &__empty {
+    @apply w-full text-center text-white text-sm p-2 border border-neutral-800 bg-neutral-700;
+  }
+
+  &__movies {
+    @apply flex flex-wrap w-full px-9 gap-4 transform -translate-y-40;
+  }
+
+  &__movie {
+    @apply relative h-[216px] max-w-[121px] min-w-[121px] transition-all delay-0 duration-200;
+
+    &-title {
+      @apply transition-all delay-100 duration-200 text-white text-[10px] font-bold m-0 absolute -bottom-[15px] w-full p-1 bg-neutral-800 text-center opacity-0;
+    }
+
+    &:hover {
+      @apply transform scale-150 z-10 delay-300 duration-300;
+
+      .ntt-movies-list__movie-title {
+        @apply opacity-100 delay-300 duration-300;
+      }
+    }
+  }
+}

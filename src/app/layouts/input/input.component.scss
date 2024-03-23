@@ -10,7 +10,7 @@ input::placeholder {
   }
 
   &.ntt-input--disabled {
-    @apply bg-primary text-gray-500 cursor-not-allowed;
+    @apply bg-neutral-500 cursor-not-allowed;
   }
 
   &.ntt-input--bordered {

@@ -10,6 +10,7 @@ interface AppRoute extends Route {
 const hasLoggedIn: CanActivateFn = (route, state) => {
   const router: Router = inject(Router);
   const userName: Observable<User.Properties['name']> = inject(UserService).getName();
+  const needsLogin = route.data?.['needsLogin'];
 
   const hasName = userName.pipe(
     map(name => !!name),
@@ -17,7 +18,11 @@ const hasLoggedIn: CanActivateFn = (route, state) => {
   );
 
   hasName.subscribe(hasName => {
-    if (!hasName) {
+    if (hasName && !needsLogin) {
+      router.navigate([getRoutePath('Movies')])
+    }
+
+    if (!hasName && needsLogin) {
       router.navigate([getRoutePath('Home')])
     }
   });
@@ -29,18 +34,26 @@ export const routes: AppRoute[] = [
   {
     name: 'Home',
     path: '',
-    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent)
+    loadComponent: () => import('./pages/home/home.component').then(m => m.HomeComponent),
+    canActivate: [hasLoggedIn],
   },
   {
     name: 'Movies',
     path: 'movies',
     loadComponent: () => import('./pages/movies/movies.component').then(m => m.MoviesComponent),
     canActivate: [hasLoggedIn],
+    data: {
+      needsLogin: true
+    }
   },
   {
     name: 'Movie',
     path: 'movie/:id',
     loadComponent: () => import('./pages/movie/movie.component').then(m => m.MovieComponent),
+    canActivate: [hasLoggedIn],
+    data: {
+      needsLogin: true
+    }
   },
   {
     name: '404',
@@ -57,7 +70,10 @@ export const routes: AppRoute[] = [
 export const routesModule: Routes = routes.map(route => {
   const {name, ...rest} = route;
 
-  return rest;
+  return {
+    data: { needsLogin: false },
+    ...rest,
+  }
 });
 
 export const getRoutePath = (name: AppRoute['name']): AppRoute['path'] => {

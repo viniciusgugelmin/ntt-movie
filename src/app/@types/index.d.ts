@@ -3,6 +3,11 @@ namespace Movies {
     Search?: (Movie)[] | null;
   }
 
+  export interface GetUrlResponseError {
+    Error: string;
+    Response: string;
+  }
+
   export interface Movie {
     Title: string;
     Year: string;

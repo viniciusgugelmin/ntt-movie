@@ -1,12 +1,41 @@
-<div *ngIf="(isLoading$ | async)">
-  Loading...
-</div>
-<div *ngIf="(error$ | async)">
-  Error
-</div>
-<div *ngIf="(movies$ | async)?.length === 0">
-  No movies found
-</div>
-<div *ngFor="let movie of movies$ | async">
-  {{ movie.Title }}
+<div class="ntt-movies-list">
+  <ng-container *ngIf="isLoading$ | async">
+    <div class="ntt-movies-list__loading">
+      Loading...
+    </div>
+  </ng-container>
+  <ng-container *ngIf="(error$ | async) as error">
+    <div class="ntt-movies-list__error">
+      {{ error }}
+    </div>
+  </ng-container>
+  <ng-template [ngIf]="!(isLoading$ | async) && !(error$ | async)">
+    <div
+      *ngIf="(movies$ | async)?.length === 0 else movies"
+      class="ntt-movies-list__empty"
+    >
+      No movies to display, try searching for something else
+    </div>
+    <ng-template #movies>
+      <div
+        class="ntt-movies-list__movies"
+      >
+        <a
+          routerLink="/movie/{{ movie.imdbID }}"
+          *ngFor="let movie of movies$ | async"
+          class="ntt-movies-list__movie"
+        >
+          <img
+            class="ntt-movies-list__movie-poster"
+            [ngSrc]="movie.Poster"
+            [alt]="movie.Title"
+            fill="cover"
+          />
+          <p class="ntt-movies-list__movie-title">
+            {{ movie.Title }}
+          </p>
+        </a>
+      </div>
+    </ng-template>
+  </ng-template>
 </div>
