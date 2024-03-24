@@ -8,7 +8,12 @@ import {provideEffects} from "@ngrx/effects";
 import {MoviesEffects} from "./store/effects/movies.effects";
 import {provideHttpClient} from "@angular/common/http";
 import {UserEffects} from "./store/effects/user.effects";
+import {provideStoreDevtools} from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routesModule), provideStore(reducers), provideEffects(MoviesEffects, UserEffects), provideHttpClient()]
+  providers: [provideRouter(routesModule), provideStore(reducers), provideEffects(MoviesEffects, UserEffects), provideHttpClient(), provideStoreDevtools({
+    maxAge: 25,
+    logOnly: false,
+    connectInZone: true
+  })]
 };
