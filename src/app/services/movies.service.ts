@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.development";
 import {HttpClient} from "@angular/common/http";
-import {catchError, delay, from, map, Observable} from "rxjs";
+import {delay, from, map, Observable} from "rxjs";
 import {LocalStorageService} from "./local-storage.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
-  private apiUrl = environment.apiUrl;
-  private apiKey = environment.apiKey;
+  private apiUrl = environment.API_URL!;
+  private apiKey = environment.API_KEY!;
 
   constructor(private http: HttpClient, private localStorageService: LocalStorageService) {
   }
